@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Product Discovery Output: Field Sales Content Availability</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #627284;
+      --line: #d9e1e8;
+      --bg: #f4f7f9;
+      --panel: #ffffff;
+      --nav: #102235;
+      --blue: #245f9f;
+      --teal: #0f766e;
+      --green: #526f2d;
+      --gold: #9a6a13;
+      --red: #9b423b;
+      --violet: #6652a3;
+      --shadow: 0 18px 46px rgba(27, 43, 58, .09);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      background: var(--nav);
+      color: #f8fbff;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .brand {
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+
+    .eyebrow {
+      color: #aab8c6;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .brand p,
+    .side-note {
+      margin: 12px 0 0;
+      color: #cbd6df;
+      font-size: 14px;
+    }
+
+    .side-note {
+      margin-top: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.07);
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .nav-item {
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.05);
+      color: #dfe9f2;
+      border-radius: 8px;
+      min-height: 66px;
+      padding: 13px 14px;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: start;
+      text-decoration: none;
+    }
+
+    .nav-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      background: rgba(255,255,255,.12);
+      color: inherit;
+      font-weight: 800;
+    }
+
+    .nav-title {
+      display: block;
+      font-weight: 780;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .nav-sub {
+      display: block;
+      color: inherit;
+      opacity: .76;
+      font-size: 12px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1480px;
+      padding: 34px min(4vw, 54px) 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 26px;
+    }
+
+    .hero-copy {
+      padding: 4px 0 0;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 960px;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 850px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .snapshot {
+      border-radius: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      align-self: start;
+    }
+
+    .snapshot h3 {
+      margin: 0 0 14px;
+      font-size: 17px;
+    }
+
+    .facts {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fact {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .fact span:first-child {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .fact strong {
+      text-align: right;
+      font-size: 15px;
+    }
+
+    section {
+      margin-top: 22px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 640px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfd;
+      min-height: 132px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: var(--nav);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      color: var(--ink);
+    }
+
+    .tag.red { color: var(--red); background: #fbf1f0; border-color: #edd1ce; }
+    .tag.gold { color: var(--gold); background: #fbf5e8; border-color: #ebdcbf; }
+    .tag.green { color: var(--green); background: #f1f6ec; border-color: #d5e2c8; }
+    .tag.blue { color: var(--blue); background: #edf4fb; border-color: #cfdfef; }
+    .tag.violet { color: var(--violet); background: #f3f0fb; border-color: #dcd4f1; }
+    .tag.teal { color: var(--teal); background: #edf8f6; border-color: #cce7e1; }
+
+    .callout {
+      border-left: 5px solid var(--blue);
+      background: #f8fbff;
+      padding: 18px 18px 18px 20px;
+      border-radius: 8px;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fbfcfd;
+    }
+
+    .card h4 {
+      margin: 0 0 9px;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 720px;
+    }
+
+    th {
+      color: var(--muted);
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-bottom: 1px solid var(--line);
+      padding: 0 12px 10px 0;
+    }
+
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 13px 12px 13px 0;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    blockquote {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 17px;
+      background: #fbfcfd;
+      color: var(--ink);
+    }
+
+    blockquote p {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    blockquote cite {
+      color: var(--muted);
+      font-size: 13px;
+      font-style: normal;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      border-top: 4px solid var(--teal);
+      background: #fbfcfd;
+      border-radius: 8px;
+      padding: 16px;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: 166px;
+    }
+
+    .step:nth-child(2) { border-top-color: var(--blue); }
+    .step:nth-child(3) { border-top-color: var(--gold); }
+    .step:nth-child(4) { border-top-color: var(--violet); }
+
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        display: block;
+      }
+
+      aside {
+        position: relative;
+        height: auto;
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero,
+      .grid-2,
+      .grid-3,
+      .metric-row,
+      .quote-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 24px 16px 40px;
+      }
+
+      aside {
+        padding: 24px 16px;
+      }
+
+      .nav-list {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 34px;
+      }
+
+      .panel,
+      .snapshot {
+        padding: 18px;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="eyebrow">Sample Output</div>
+        <h1>Product Discovery Brief</h1>
+        <p>Discovery frames the problem, audience, evidence, risks, and next learning needed. It does not try to solve the problem or define the final product solution.</p>
+      </div>
+
+      <nav class="nav-list" aria-label="Page sections">
+        <a class="nav-item" href="#summary">
+          <span class="nav-number">1</span>
+          <span><span class="nav-title">Summary</span><span class="nav-sub">Decision, problem, and evidence</span></span>
+        </a>
+        <a class="nav-item" href="#data">
+          <span class="nav-number">2</span>
+          <span><span class="nav-title">Synthetic Data</span><span class="nav-sub">Signals from sales, CRM, and content</span></span>
+        </a>
+        <a class="nav-item" href="#opportunities">
+          <span class="nav-number">3</span>
+          <span><span class="nav-title">Opportunities</span><span class="nav-sub">Where discovery should focus</span></span>
+        </a>
+        <a class="nav-item" href="#plan">
+          <span class="nav-number">4</span>
+          <span><span class="nav-title">Next Steps</span><span class="nav-sub">Research and decision path</span></span>
+        </a>
+      </nav>
+
+      <div class="side-note">
+        All data in this sample is synthetic and intended to demonstrate the type of output the Product Discovery skill could generate.
+      </div>
+    </aside>
+
+    <main>
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="kicker">Product Discovery Skill Example</div>
+          <h2>Field sales reps cannot reliably find the right content before client meetings.</h2>
+          <p>This sample shows how the Product Discovery skill can turn a broad business concern into a structured problem and opportunity brief with synthetic evidence, risks, opportunity areas, and recommended learning actions.</p>
+        </div>
+
+        <div class="snapshot" aria-label="Sample snapshot">
+          <h3>Discovery Snapshot</h3>
+          <div class="facts">
+            <div class="fact"><span>Business area</span><strong>Field sales enablement</strong></div>
+            <div class="fact"><span>Primary user</span><strong>Account executives in the field</strong></div>
+            <div class="fact"><span>Decision needed</span><strong>Prioritize discovery for mobile content findability</strong></div>
+            <div class="fact"><span>Evidence strength</span><strong>Medium, directional</strong></div>
+            <div class="fact"><span>Recommended next step</span><strong>2-week focused validation sprint</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <section id="summary">
+        <div class="section-head">
+          <div>
+            <div class="kicker">1. Discovery Brief</div>
+            <h3>What decision are we trying to make?</h3>
+          </div>
+          <p>Determine whether improving content discovery inside the mobile sales experience should become a near-term product priority.</p>
+        </div>
+
+        <div class="panel">
+          <div class="grid-2">
+            <div class="callout">
+              <p><strong>Problem statement:</strong> For field sales reps preparing for client meetings, when they need account-relevant content in the mobile app, they struggle to find the right case study, deck, product sheet, or objection-handling material because content is fragmented, weakly tagged, and not surfaced in the context of the meeting.</p>
+            </div>
+            <div class="card">
+              <h4>Why It Matters</h4>
+              <p>Reps spend meeting prep time searching, reusing stale content, or asking peers for assets. This can reduce message quality, slow selling motion, and weaken customer confidence during high-value conversations.</p>
+              <ul>
+                <li>More prep time spent searching than tailoring.</li>
+                <li>Higher risk of outdated or off-brand material.</li>
+                <li>Lower confidence in account-specific messaging.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="height: 18px;"></div>
+
+          <div class="metric-row">
+            <div class="metric">
+              <strong>42%</strong>
+              <span>of surveyed field reps said finding the right pre-meeting content is a frequent friction point.</span>
+            </div>
+            <div class="metric">
+              <strong>11 min</strong>
+              <span>average reported time spent searching for client-ready content before a meeting.</span>
+            </div>
+            <div class="metric">
+              <strong>31%</strong>
+              <span>of recent mobile content searches ended without a content open or share event.</span>
+            </div>
+            <div class="metric">
+              <strong>18%</strong>
+              <span>of shared assets were more than 12 months old in the sample account-meeting dataset.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="data">
+        <div class="section-head">
+          <div>
+            <div class="kicker">2. Synthetic Data</div>
+            <h3>Directional signals from the field</h3>
+          </div>
+          <p>The data below is invented for this sample, but structured like the inputs a PM might provide to the discovery agent.</p>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Signal Source</th>
+                <th>Synthetic Finding</th>
+                <th>Interpretation</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Field rep survey<br><span class="tag blue">n = 86</span></td>
+                <td>42% report difficulty finding the right asset before a client meeting at least weekly.</td>
+                <td>The issue appears recurring, not isolated to a single region or team.</td>
+                <td><span class="tag gold">Medium</span></td>
+              </tr>
+              <tr>
+                <td>Mobile app analytics<br><span class="tag teal">30 days</span></td>
+                <td>31% of content searches produce no asset open, save, or share event within the next five minutes.</td>
+                <td>Search may be failing, results may not look trustworthy, or reps may switch to another channel.</td>
+                <td><span class="tag gold">Medium</span></td>
+              </tr>
+              <tr>
+                <td>CRM meeting prep logs<br><span class="tag violet">420 meetings</span></td>
+                <td>Only 27% of meetings had a content interaction in the CRM mobile app within 24 hours before the meeting.</td>
+                <td>Content may not be embedded naturally into meeting prep workflows.</td>
+                <td><span class="tag red">Low</span></td>
+              </tr>
+              <tr>
+                <td>Sales enablement tickets<br><span class="tag blue">64 requests</span></td>
+                <td>Top request theme is "which deck should I use for this account?" followed by "where is the latest version?"</td>
+                <td>Reps need confidence, freshness, and relevance, not only file search.</td>
+                <td><span class="tag green">High</span></td>
+              </tr>
+              <tr>
+                <td>Content library audit<br><span class="tag teal">1,180 assets</span></td>
+                <td>38% of assets lack industry tags; 46% lack sales-stage tags; 22% have no owner listed.</td>
+                <td>Metadata quality likely limits personalized recommendations.</td>
+                <td><span class="tag gold">Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="height: 16px;"></div>
+
+        <div class="quote-grid">
+          <blockquote>
+            <p>"I usually search on my phone, give up, and message the team channel for the latest healthcare deck."</p>
+            <cite>Synthetic quote, enterprise AE</cite>
+          </blockquote>
+          <blockquote>
+            <p>"The app knows my meeting and account, but the content tab still feels like a generic file cabinet."</p>
+            <cite>Synthetic quote, strategic account rep</cite>
+          </blockquote>
+          <blockquote>
+            <p>"I am never fully sure if the asset I found is approved or current enough to send to the client."</p>
+            <cite>Synthetic quote, mid-market AE</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="kicker">3. Customer And Business Context</div>
+            <h3>Who is affected and what outcome is at stake?</h3>
+          </div>
+          <p>The discovery agent should separate user pain from business impact so the team can make a better product decision.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <span class="tag blue">Primary user</span>
+            <h4>Field Account Executive</h4>
+            <p>Needs to prepare quickly between meetings, tailor the conversation to account context, and share approved content from a mobile-first workflow.</p>
+          </div>
+          <div class="card">
+            <span class="tag teal">Business partner</span>
+            <h4>Sales Enablement</h4>
+            <p>Needs reps to use current, approved, measurable content instead of stale decks, local copies, or informal peer recommendations.</p>
+          </div>
+          <div class="card">
+            <span class="tag violet">Business outcome</span>
+            <h4>Meeting Quality</h4>
+            <p>Improve readiness, consistency, and relevance of client conversations without adding administrative burden to the sales motion.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="opportunities">
+        <div class="section-head">
+          <div>
+            <div class="kicker">4. Opportunity Areas</div>
+            <h3>Where should the team focus discovery?</h3>
+          </div>
+          <p>These are not feature commitments. They are opportunity areas that should be tested with users and data.</p>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Opportunity</th>
+                <th>User Value</th>
+                <th>Business Value</th>
+                <th>Main Risk</th>
+                <th>Next Learning Step</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Meeting-aware content recommendations</strong></td>
+                <td>Surface relevant assets from account, industry, opportunity stage, product interest, and meeting objective.</td>
+                <td>Increase use of approved content and improve consistency of field messaging.</td>
+                <td>Recommendations may be noisy if CRM data or content metadata is incomplete.</td>
+                <td>Run concept test with 12 reps using real upcoming meetings.</td>
+              </tr>
+              <tr>
+                <td><strong>Content trust signals</strong></td>
+                <td>Show freshness, approval status, owner, use case, and last updated date directly in mobile results.</td>
+                <td>Reduce use of outdated or off-brand assets.</td>
+                <td>Trust labels may require governance and content owner adoption.</td>
+                <td>Prototype trust labels and test comprehension with reps and enablement.</td>
+              </tr>
+              <tr>
+                <td><strong>Prep workflow integration</strong></td>
+                <td>Embed content tasks into the existing CRM meeting prep flow instead of making reps search separately.</td>
+                <td>Increase content usage without creating a new workflow reps must remember.</td>
+                <td>Could clutter the mobile prep experience if timing and placement are wrong.</td>
+                <td>Observe 8 reps preparing for real meetings on mobile.</td>
+              </tr>
+              <tr>
+                <td><strong>Content metadata cleanup</strong></td>
+                <td>Improve search and recommendations by standardizing stage, industry, persona, and product tags.</td>
+                <td>Creates foundation for scalable personalization and reporting.</td>
+                <td>Metadata work may be operationally expensive and slow without clear ownership.</td>
+                <td>Audit top 100 shared assets and define minimum viable tagging standard.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="kicker">5. Assumptions And Risks</div>
+            <h3>What must be true for this to be worth solving?</h3>
+          </div>
+          <p>The discovery agent should make uncertainty explicit before the product team moves into solution definition.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Highest-Risk Assumptions</h4>
+            <ul>
+              <li>Reps would use recommended content if surfaced inside the meeting workflow.</li>
+              <li>CRM meeting data is complete enough to infer useful content needs.</li>
+              <li>Content metadata can be improved without creating a heavy manual process.</li>
+              <li>Meeting content quality has measurable impact on sales outcomes or rep efficiency.</li>
+              <li>Sales enablement can maintain trust signals such as approved, current, and recommended.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Evidence Gaps</h4>
+            <ul>
+              <li>Actual behavior during mobile meeting prep, not just self-reported friction.</li>
+              <li>Which content attributes matter most by segment, industry, and sales stage.</li>
+              <li>How often reps use external channels because mobile search fails.</li>
+              <li>Whether reps want recommendations, better search, stronger filters, or peer proof.</li>
+              <li>Which business metric should anchor prioritization: rep time, content reuse, meeting quality, or pipeline influence.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan">
+        <div class="section-head">
+          <div>
+            <div class="kicker">6. Recommended Discovery Plan</div>
+            <h3>Two-week learning sprint</h3>
+          </div>
+          <p>Recommended action: move from initial discovery synthesis into focused validation before committing to a feature direction.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="step">
+            <strong>1. Observe Real Prep</strong>
+            <p>Watch 8 field reps prepare for upcoming meetings on mobile. Capture search behavior, switching, friction, workarounds, and decision points.</p>
+          </div>
+          <div class="step">
+            <strong>2. Test Concepts</strong>
+            <p>Use lightweight prototypes for meeting-aware recommendations, trust labels, and prep-flow placement. Compare comprehension and preference.</p>
+          </div>
+          <div class="step">
+            <strong>3. Audit Content Quality</strong>
+            <p>Review top shared and searched assets for metadata completeness, ownership, freshness, industry tags, persona tags, and stage tags.</p>
+          </div>
+          <div class="step">
+            <strong>4. Prepare Decision Memo</strong>
+            <p>Recommend whether to prioritize recommendation UX, trust signals, metadata cleanup, workflow integration, or a smaller experiment.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="kicker">7. Success Measures</div>
+            <h3>How we might know the problem is improving</h3>
+          </div>
+          <p>Metrics should be refined after validating which behavior best represents value.</p>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Measure Type</th>
+                <th>Candidate Metric</th>
+                <th>Why It Matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>User behavior</td>
+                <td>Increase in pre-meeting content open or share events from mobile.</td>
+                <td>Shows reps are using content in the moment the product is trying to support.</td>
+              </tr>
+              <tr>
+                <td>Efficiency</td>
+                <td>Reduction in self-reported time to find client-ready content.</td>
+                <td>Captures prep burden and field workflow impact.</td>
+              </tr>
+              <tr>
+                <td>Quality</td>
+                <td>Decrease in shares of outdated or unapproved assets.</td>
+                <td>Aligns product improvement with enablement governance and message consistency.</td>
+              </tr>
+              <tr>
+                <td>Business signal</td>
+                <td>Increase in content-influenced meeting progression for targeted opportunity stages.</td>
+                <td>Connects the discovery area to sales outcomes, but requires careful attribution.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="kicker">8. Product Decision Recommendation</div>
+            <h3>Move into focused validation, then choose a narrow experiment</h3>
+          </div>
+          <p>The evidence is strong enough to move beyond broad discovery, but not yet strong enough to commit to a specific feature build.</p>
+        </div>
+
+        <div class="panel">
+          <div class="grid-2">
+            <div>
+              <span class="tag gold">Recommendation</span>
+              <h3 style="margin: 10px 0 8px; font-size: 24px;">Run a two-week validation sprint before roadmap commitment.</h3>
+              <p style="margin: 0; color: var(--muted);">The likely opportunity is not "better search" alone. The stronger hypothesis is that field reps need meeting-aware, trusted, and current content surfaced inside the CRM mobile prep workflow.</p>
+            </div>
+            <div class="card">
+              <h4>Decision After Sprint</h4>
+              <ul>
+                <li>Prioritize a meeting-aware recommendation prototype.</li>
+                <li>Prioritize trust signals and content governance.</li>
+                <li>Prioritize metadata cleanup before UX investment.</li>
+                <li>Pause if observed behavior does not support the stated problem.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        Synthetic sample output for the Product Discovery skill. No real customer, sales, CRM, or company data is included.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
