@@ -22,8 +22,7 @@ These files are designed for product managers working inside large or regulated 
 1. Open the skill file for the activity you're working on
 2. Each skill will have 3 files (README, Skill File, Example Output).  Be sure to start with the README file for all of the instructions on that skill
 3. Copy the files down to your own system for editing and use 
-4. Follow the instructions in the README
-5. Save your customized version separately — keep the base file clean for reuse
+4. Save your customized version separately — keep the base file clean for reuse
 
 > **Note:** These are generic base files. They are designed to be customized for your organization, product domain, and team. Never paste proprietary or sensitive information into a public AI tool.
 
@@ -50,7 +49,7 @@ Product Strategy comes after Discovery and Prototype, not before. Direction info
 Executive Storytelling is not a launch activity. In an enterprise, it is a gate. There is no point completing a roadmap, writing specs, or evaluating vendors if leadership has not funded and aligned on the direction. Get the runway secured first.
 
 **5. Plan and specify with confidence.**
-Roadmap Development and PRD Generation come after funding is secured. Now you are planning with authority, not speculation.
+Roadmap Development and PRD Generation come after funding is secured. Now you are planning with authority, not speculation.  Your prototype should be evolving into the solution you're looking to enable and will inform the next several steps.
 
 **6. Evaluate build vs. buy before you start building.**
 Vendor & Platform Selection happens before Evaluation and Analytics — because what you are building, and with what tools, heavily influences every decision that follows.
@@ -90,13 +89,13 @@ The AI PM Coach is the capstone — an ongoing skill that ties the entire system
 One skill is released every two weeks, paired with a deep-dive post on Substack that walks through the skill concept, how it's structured, and how to apply it in an enterprise context.
 
 **Subscribe to the Substack to get each skill as it drops:**
-https://haley062098.substack.com/
+https://aipmenthusiast.substack.com/
 
 ---
 
 ## Who this is for
 
-Product managers working inside large organizations — especially regulated industries like financial services, healthcare, or insurance — who want AI to be a genuine force multiplier, not a novelty.
+Product managers working inside large organizations — especially regulated industries like financial services, healthcare, or insurance — who want AI to be a genuine force multiplier, not a novelty.  
 
 If you are building software inside a large enterprise and you want consistent, governed, high-quality AI output across your entire PM workflow, this library is for you.  Even if you're in a different industry or a startup, these skills could be modified and applicable.
 
